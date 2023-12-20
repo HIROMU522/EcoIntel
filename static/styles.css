@@ -1,0 +1,336 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+  background: #D09EA6; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left top, #00659C, #6A1B9A); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, #00659C, #6A1B9A); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, #00695C, #6A1B9A); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, #00695C, #6A1B9A); /* Standard syntax */
+  overflow-x: hidden;
+  padding-top:70px ;
+  height: 100%;
+  margin: 0;
+}
+
+.header {
+    background-color: rgba(250, 250, 252, .8);
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-sizing: border-box;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.header-link {
+    color: white;
+    text-decoration: none;
+}
+
+.header-link:active,
+.header-link:focus {
+    text-decoration: none;
+    outline: none;
+}
+
+.header .header-link img:hover {
+    transform: rotate(10deg);
+}
+
+.menu {
+    overflow: hidden; /* Ensures the menu does not affect surrounding elements */
+    display: flex; /* Align menu items in a row */
+    justify-content: center; /* Center the menu items horizontally */
+  }
+  
+  .menu a {
+    float: left; /* Float the links so they sit side by side */
+    display: block; /* Change links from inline to block elements */
+    color: rgb(0, 0, 0); /* White text color */
+    text-align: center; /* Center text inside links */
+    padding: 14px 16px; /* Add some padding for a larger click area */
+    text-decoration: none; /* Remove underlines from links */
+    font-size: 15px; /* Increase font size */
+    transition: color 0.3s;
+  }
+
+  .menu a:hover {
+    color: #9e9c9c; /* カーソルを合わせた時の文字色は薄い黒（例えば、中間の灰色） */
+}
+  
+  
+  /* Add responsiveness to the menu */
+  @media screen and (max-width: 600px) {
+    .menu a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+  }
+
+
+
+  .container {
+    width: 100%;
+    max-width: 800px;
+    margin: 150px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 15px 5px rgba(0,0,0,0.3);
+    border-radius: 3px;
+}
+
+
+
+
+h1 {
+    color: #666262;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.input-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 20px; /* 要素間のスペースを一定に保つ */
+}
+
+#error {
+  text-align: center; /* テキストを中央寄せにする */
+  color: red; /* エラーメッセージの色を赤に設定 */
+  margin-top: 20px; /* 上部にマージンを設定 */
+  font-size: 1rem; /* フォントサイズを設定 */
+  width: 100%; /* 幅を100%に設定 */
+}
+
+
+
+.image-upload-label {
+    padding: 10px 20px;
+    background-color: #6A1B9A;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.image-upload-label:hover {
+    background-color: #00897B;
+}
+
+.image-upload {
+    display: none; /* デフォルトのファイルアップロードフィールドを隠す */
+}
+
+.predict-btn {
+    padding: 10px 20px;
+    background-color: #75cc82;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: transform 0.3s ease, background-color 0.2s ease;
+}
+
+.predict-btn:hover {
+    transform: translateY(-3px);
+    background-color: #66b372; /* ホバー時の背景色を変更 */
+}
+
+/* レスポンシブデザインのためのメディアクエリ */
+@media (max-width: 600px) {
+    .input-section {
+        flex-direction: column;
+    }
+}
+
+
+#imagePreview {
+    border: 3px solid black;
+    margin-bottom: 20px;
+}
+/*アニメーションの追加*/
+.loader,
+.loader:before,
+.loader:after {
+  background: #0dc5c1;
+  -webkit-animation: load1 1s infinite ease-in-out;
+  animation: load1 1s infinite ease-in-out;
+  width: 1em;
+  height: 4em;
+}
+.loader {
+  color: #0dc5c1;
+  text-indent: -9999em;
+  margin: 88px auto;
+  position: relative;
+  font-size: 11px;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+.loader:before,
+.loader:after {
+  position: absolute;
+  top: 0;
+  content: '';
+}
+.loader:before {
+  left: -1.5em;
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.loader:after {
+  left: 1.5em;
+}
+@-webkit-keyframes load1 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
+}
+@keyframes load1 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
+}
+/*ここまで*/
+.result {
+    margin-top: 30px;
+    font-size: 18px;
+    text-align: left;
+    padding-left: 180px;
+}
+
+.modal {
+  visibility: hidden; /* 初期状態では見えない */
+  opacity: 0; /* 初期状態では透明 */
+  transition: visibility 0s, opacity 1.0s ease; /* 透明度の変化にトランジションを適用 */
+  position: fixed; /* 画面全体に対して固定 */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* 必要に応じてスクロール */
+  background-color: rgba(0, 0, 0, 0.4); /* 背景の暗めのオーバーレイ */
+  z-index: 1000; /* 他の要素より高いz-index */
+}
+
+.modal.show {
+  visibility: visible; /* 見えるように */
+  opacity: 1; /* 完全に不透明 */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 画面の中央に配置 */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* 必要に応じて調整 */
+  z-index: 1001; /* modalよりも一段高いz-index */
+}
+
+/* その他のスタイル */
+
+
+/* 閉じるボタン */
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#showResultButton {
+  display: block; /* ブロック要素として設定 */
+  margin-left: auto; /* 左マージンを自動に設定 */
+  margin-right: auto; /* 右マージンを自動に設定 */
+  padding: 15px 30px; /* ボタンの大きさを決定 */
+  background-color: #4CAF50; /* 明るい緑色の背景 */
+  color: white; /* 白色のテキスト */
+  font-size: 16px; /* フォントサイズを適切に設定 */
+  border: none; /* 境界線を取り除く */
+  border-radius: 5px; /* 角を丸くする */
+  cursor: pointer; /* ホバー時にカーソルをポインターに変更 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* ソフトな影を追加 */
+  transition: all 0.3s ease; /* スムーズな遷移効果 */
+}
+
+#showResultButton:hover {
+  background-color: #45a049; /* ホバー時に背景色を変更 */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* ホバー時に影を大きくする */
+}
+
+#showResultButton:active {
+  background-color: #3e8e41; /* アクティブ時（クリック時）の背景色 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* アクティブ時の影を小さくする */
+}
+
+
+
+.close-button:hover,
+.close-button:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+.body-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Viewport Heightを使用して画面の高さに合わせます */
+}
+
+.main-content {
+    flex: 1; /* これによりメインコンテンツが伸びてフッターを画面下に押し出します */
+}
+
+.footer {
+    width: 100%;
+    background-color: #d2d2d7; /* 以前のスタイルを保持 */
+    color: rgba(0, 0, 0, 0.8);
+    text-align: center;
+    padding: 10px 0;
+    font-size: 10px;
+    /* 'position: fixed' と 'bottom: 0' を削除 */
+}
+
+
+
+.mypage_icon:hover{
+  opacity: 0.5;
+}
+
+

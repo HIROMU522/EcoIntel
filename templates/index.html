@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoIntel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='navigation.css') }}">
+    <link rel="icon" href="/static/images/logo.ico" sizes="any"><!-- 32×32 -->
+</head>
+<body>
+
+<div class="body-content">
+    <!-- ヘッダー -->
+    {% include 'navigation.html' %}
+    <!-- メインコンテンツ -->
+    <main class="main-content">
+        <div class="container">
+            <h1>分別したいゴミの画像をアップロード。</h1>
+
+            <div id="error"></div>
+
+            <div class="input-section">
+                <label for="imageUpload" class="image-upload-label">画像をアップロード</label>
+                <input type="file" id="imageUpload" class="image-upload" onchange="previewImage(this)" style="display: none;">
+                <img id="imagePreview" src="#" alt="Selected Image" style="display:none; max-width: 100%; margin-top: 20px;">
+                <button id="predict-btn" onclick="predictImage()" class="predict-btn" style="display: none;">Start</button>
+            </div>
+
+            <div id="loading" style="display: none;">
+                <div class="loader"></div>
+            </div>
+
+            <button id="showResultButton" style="display: none;">結果を再表示</button>
+
+            <div id="resultModal" class="modal">
+                <div class="modal-content">
+                    <span class="close-button">&times;</span>
+                    
+                    <!-- 結果表示用のパラグラフ -->
+                    <p id="modalResult"></p>
+    
+                </div>
+            </div>
+            
+
+            <div class="result" id="result"></div>
+        </div>
+        
+    </main>
+   
+    <div class="footer">© 2023 EcoIntel.Inc</div>
+   
+</div>
+
+<script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>

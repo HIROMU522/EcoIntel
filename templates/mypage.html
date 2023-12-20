@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マイページ</title>
+    <link rel="icon" href="/static/images/logo.ico" sizes="any">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_mypage.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='navigation.css') }}">
+
+</head>
+<body>
+    {% include 'navigation.html' %}    
+    <div class="profile-container">
+        <header class="profile-header">
+            <nav class="profile-nav">
+                <ul>
+                    <li><a href="/settings">設定</a></li>
+                    <li><a href="/logout">ログアウト</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main class="profile-main">
+            <section class="profile-info">
+                <img src="profile-placeholder.png" alt="プロフィール画像" class="profile-picture"> <!-- プロフィール画像のパスを設定してください -->
+                <h1>{{ user.fullname }}</h1>
+                <p class="username">@{{ user.username }}</p>
+                <p class="bio">紹介文</p>
+            </section>
+            <section class="profile-details">
+                <h2>連絡先情報</h2>
+                <p><strong>メール:</strong> {{ user.email }}</p>
+                <p><strong>郵便番号:</strong> {{ user.postal_code }}</p>
+                <p><strong>住所:</strong> {{ user.address }}</p>
+                <p><strong>電話番号:</strong> {{ user.phone_number }}</p>
+                <p><strong>生年月日:</strong> {{ user.birth_date.strftime('%Y-%m-%d') if user.birth_date else '未設定' }}</p>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script> <!-- 必要なJavaScriptのパスを設定してください -->
+</body>
+</html>

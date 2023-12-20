@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>問い合わせ</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles_contact.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='navigation.css') }}">
+        <link rel="icon" href="/static/images/logo.ico" sizes="any"><!-- 32×32 -->
+    </head>
+    <body>
+        <!-- ヘッダー -->
+        {% include 'navigation.html' %}
+        <div class="contact">
+            <h1 class="contact-ttl">Contact</h1>
+            <form action="/submit_contact" method="post">
+                <table class="contact-table">
+                    <!-- 名前 -->
+                    <tr>
+                        <th class="contact-item">名前</th>
+                        <td class="contact-body">
+                            <input type="text" name="名前" class="form-text" value="{{ user.fullname if user.is_authenticated else '' }}" />
+                        </td>
+                    </tr>
+                    <!-- メール -->
+                    <tr>
+                        <th class="contact-item">メール</th>
+                        <td class="contact-body">
+                            <input type="email" name="メール" class="form-text" value="{{ user.email if user.is_authenticated else '' }}" />
+                        </td>
+                    </tr>
+                    <!-- 職業 -->
+                    <tr>
+                        <th class="contact-item">職業</th>
+                        <td class="contact-body">
+                            <select name="職業" class="form-select">
+                                <option>選択</option>
+                                <option>学生</option>
+                                <option>主婦</option>
+                                <option>会社員</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <!-- お問い合わせ内容 -->
+                    <tr>
+                        <th class="contact-item">お問い合わせ内容</th>
+                        <td class="contact-body">
+                            <textarea name="問い合わせ" class="form-textarea"></textarea>
+                        </td>
+                    </tr>
+                </table>
+                <input class="contact-submit" type="submit" value="送信" />
+            </form>
+        </div>
+    </body>
+</html>

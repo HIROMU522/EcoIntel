@@ -1,0 +1,21 @@
+<!-- navigation.html -->
+<div class="header">
+    <a href="/" class="header-link">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Eco Intel" style="width: 40px; height: 40px;">
+    </a>
+    <div class="menu">
+        <a href="/purpose">Purpose</a>
+        <a href="/service">Service</a>
+        <a href="/contact">Contact</a>
+        {% if current_user.is_authenticated %}
+        <a href="/mypage">
+            <img src="/static/images/person.jpeg" alt="My Page" class="mypage_icon" style="width: 20px; height: 20px; border-radius: 50%;">
+        </a>
+        {% else %}
+            <a href="/login">Login</a>
+        {% endif %}
+    </div>
+</div>
+
+
+   

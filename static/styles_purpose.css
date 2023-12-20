@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+html, body {
+    text-align: center;
+    height: 100%;
+    background: #D09EA6; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left top, #00659C, #6A1B9A); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #00659C, #6A1B9A); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, #00695C, #6A1B9A); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, #00695C, #6A1B9A); /* Standard syntax */
+    overflow-x: hidden;
+    padding-top:70px ;
+  }
+.container {
+    max-width: 500px;
+    padding-top: 115px;
+    padding-left: 65px;
+    padding-right: 65px;
+}
+
+.container h1 {
+    font-size: 65px;
+    margin-bottom: 0;
+}
+
+.container p {
+    margin-top: 0;
+    font-size: 30px;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    gap: 245px;
+    margin-top: 80px;
+}
+
+.left-content {
+    text-align: left;
+}
+
+.left-content h1 {
+    white-space: nowrap;
+}
+
+.title {
+    overflow: hidden;
+    color: #6fcf52;
+    font-family: 'Josefin Sans', sans-serif;
+    transform: translate(-100%, 0);
+    transition: transform cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s;
+}
+
+.title span {
+    display: block;
+    transform: translate(100%, 0);
+    transition: transform cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s;
+}
+
+.title.-visible,
+.title.-visible span {
+    transform: translate(0, 0);
+}
+
+.sentence {
+    overflow: hidden;
+    font-family: "Yu Gothic Medium";
+    font-size: 30px;
+    text-align: center;
+    transform: translate(-100%, 0);
+    transition: transform cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s;
+}
+
+.sentence span {
+    display: block;
+    transform: translate(100%, 0);
+    transition: transform cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s;
+}
+
+.sentence.-visible,
+.sentence.-visible span {
+    transform: translate(0, 0);
+}
+
+.right-content {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 35px;
+}
+
+.icon-image {
+    width: 190px;
+    height: 190px;
+    margin-bottom: 10px;
+}
+
+.right-content h2 {
+    margin-top: 0;
+}
+
+.combined {
+    background-color: #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 165px;
+    margin-left: 9%; /* 左の余白を50pxに変更 */
+    margin-right: 10%; /* 右の余白を50pxに変更 */
+    margin-bottom: 10px;
+}
+
+.combined h2 {
+    font-size: 50px;
+}
+
+.combined p {
+    margin-left: 15%;
+    margin-right: 15%;
+    font-size: 30px;
+}
+
+/* バックグラウンドのアニメーション */
+.bg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    width: 80%;
+    height: 100vh;
+    color: black;
+    margin-top: 165px; /* .combinedと同じ余白を追加 */
+    margin-left: 9%; /* 左の余白を50pxに変更 */
+    margin-right: 10%; /* 右の余白を50pxに変更 */
+  }
+  
+  .bg.-visible:before {
+    transform: translate(0, 100%); /* ここを変更 */
+  }
+  
+  .bg:before {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #6fcf52;
+    transform: translate(0, 0);
+    transition: transform cubic-bezier(0.215, 0.61, 0.355, 1) 0.6s;
+    content: '';
+  }
+
+.combined {
+    background-color: #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 165px;
+    margin-left: 9%; /* 左の余白を50pxに変更 */
+    margin-right: 10%; /* 右の余白を50pxに変更 */
+    margin-bottom: 10px;
+}
+
+
+
+

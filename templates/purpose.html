@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>目的</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_purpose.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='navigation.css') }}">
+    <link rel="icon" href="/static/images/logo.ico" sizes="any"><!-- 32×32 -->
+</head>
+<body>
+    {% include 'navigation.html' %}
+    <div class="container">
+        <h1>PURPOSE</h1>
+        <p>EcoIntelの目的</p>   
+        <div class="content">
+            <div class="left-content">
+                <h1 class="title">
+                    <span>CREATE ECO FUTURE</span>
+                    <span>DEFINE YOUR ECO REALM</span>
+                </h1>
+                <p class="sentence">
+                    <span>あなたのための時間をつくり、あなただけの世界が生まれる。ゴミを知り、未来を築く。</span>
+                </p>
+            </div>  
+            <div class="right-content">
+                <img src="/static/images/logo.png" alt="EcoIntel Logo" class="icon-image">
+                <h2>EcoIntel</h2>
+            </div> 
+        </div>
+    </div>
+
+    <div class="box-container combined bg">
+        <h2>Message</h2>
+        <p>年々排出されるゴミの量が増加していることに対して、<br>ゴミの量を削減し、持続可能な未来を作り上げていくために<br>私たちにできることはないかと思い、<br>私たちは、正しいゴミの分別方法を知ることがゴミの削減につながると考え、EcoIntelを開発しました。</p>
+        <p>EcoIntelは、画像をアップロードすることで<br>画像に写るゴミの正しい分別方法を提供してくれます。</p>
+        <p>私たちは、ゴミが正しく処理されることが持続可能な未来を作り上げるために<br>重要であると信じています。</p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="/static/animation_purpose.js"></script>
+</body>
+</html>
