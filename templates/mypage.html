@@ -30,13 +30,23 @@
             <section class="profile-details">
                 <h2>連絡先情報</h2>
                 <p><strong>メール:</strong> {{ user.email }}</p>
-                <p><strong>郵便番号:</strong> {{ user.postal_code }}</p>
+                <p><strong>郵便番号:</strong> {{ user.postcode }}</p>
                 <p><strong>住所:</strong> {{ user.address }}</p>
-                <p><strong>電話番号:</strong> {{ user.phone_number }}</p>
                 <p><strong>生年月日:</strong> {{ user.birth_date.strftime('%Y-%m-%d') if user.birth_date else '未設定' }}</p>
+                 <!-- 退会ボタン -->
+                <form action="{{ url_for('delete_account') }}" method="post" id="delete-account-form">
+                    <button type="button" class="delete-account-button" onclick="confirmDelete()">退会</button>
+                </form>
             </section>
         </main>
     </div>
     <script src="script.js"></script> <!-- 必要なJavaScriptのパスを設定してください -->
+    <script>
+        function confirmDelete() {
+            if (confirm('本当に宜しいでしょうか？')) {
+                document.getElementById('delete-account-form').submit();
+            }
+        }
+    </script>
 </body>
 </html>

@@ -176,6 +176,19 @@ def mypage():
     db.session.refresh(user)
     return render_template('mypage.html', user=user)
 
+@app.route('/delete_account', methods=['POST'])
+def delete_account():
+    if current_user.is_authenticated:
+        user_to_delete = User.query.get(current_user.id)
+        if user_to_delete:
+            db.session.delete(user_to_delete)
+            db.session.commit()
+            logout_user()
+            flash('Your account has been successfully deleted.')
+        else:
+            flash('An error occurred. Please try again.')
+    return redirect(url_for('home'))
+
 @app.route('/settings')
 def settings():
     return render_template('settings.html', user=current_user)
