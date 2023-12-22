@@ -54,9 +54,9 @@ class User(UserMixin, db.Model):
 
 # モデルの読み込みとデータの準備
 model = load_model("keras_Model.h5", compile=False)
-with open('labels.txt', 'r') as file:
+with open('labels.txt', 'r', encoding="utf-8") as file:
     class_names = [line.strip() for line in file.readlines()]
-with open('explanation.txt', 'r') as file:
+with open('explanation.txt', 'r', encoding="utf-8") as file:
     explanations = [line.strip() for line in file.readlines()]
 
 @login_manager.user_loader
