@@ -1,4 +1,13 @@
-body {
+html, body {
+    text-align: center;
+    height: 100%;
+    background: #D09EA6; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left top, #00659C, #6A1B9A); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #00659C, #6A1B9A); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, #00695C, #6A1B9A); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, #00695C, #6A1B9A); /* Standard syntax */
+    overflow-x: hidden;
+    padding-top:70px ;
     color: #333;
     font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
 }
@@ -7,6 +16,7 @@ body {
     width: 960px;
     margin: 0 auto;
     padding: 60px 0;
+    color: white;
 }
 
 .contact-ttl {
@@ -19,7 +29,10 @@ body {
 .contact-table {
     width: 100%;
     margin-bottom: 20px;
-    border: 1px solid #ccc;
+    border: 5px solid #ccc;
+    background-color: #fff;
+    border-radius: 3px ;
+    color: black;
 }
 
 .contact-item,
