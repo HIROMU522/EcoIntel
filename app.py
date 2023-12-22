@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, redirect, url_for, flash
+from flask import Flask, render_template, request, jsonify, redirect, url_for, flash, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -8,6 +8,7 @@ import cv2
 from datetime import datetime
 import os
 from flask_mail import Mail, Message
+import requests
 
 
 
@@ -283,6 +284,53 @@ def predict():
         'confidence_score': str(np.round(confidence_score * 100))[:-2],
         'explanation': explanation
     })
+
+
+# 町と校区のマッピングを読み込む
+town_to_school_mapping = {}
+with open('town_school_mapping.txt', 'r', encoding='utf-8') as file:
+    for line in file:
+        parts = line.strip().split()
+        if len(parts) == 2:
+            town, school = parts
+            if town in town_to_school_mapping:
+                town_to_school_mapping[town].append(school)
+            else:
+                town_to_school_mapping[town] = [school]
+
+
+
+@app.route('/get_address', methods=['GET'])
+def get_address():
+    zipcode = request.args.get('zipcode')
+    if not zipcode:
+        return jsonify({"error": "No zipcode provided"}), 400
+
+    url = 'https://zipcloud.ibsnet.co.jp/api/search'
+    response = requests.get(url, params={'zipcode': zipcode})
+    data = response.json()
+
+    if 'results' in data and data['results']:
+        # 住所を取得（エラーチェックが必要）
+        address1 = data["results"][0]["address1"]
+        address2 = data["results"][0]["address2"]
+        address3 = data["results"][0]["address3"]
+        full_address = address1 + address2 + address3
+        town_name = address3
+        return jsonify({"address": full_address, "town_name": town_name})
+    else:
+        # エラーレスポンスを返す
+        return jsonify({"error": "No address found for the provided zipcode"}), 404
+
+
+@app.route('/get_school_districts', methods=['GET'])
+def get_school_districts():
+    town_name = request.args.get('town')
+    school_districts = town_to_school_mapping.get(town_name, ["不明"])
+    return jsonify({"school_districts": school_districts})
+
+
+
 
 # メイン関数
 if __name__ == '__main__':
