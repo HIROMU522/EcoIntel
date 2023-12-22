@@ -25,7 +25,7 @@ function fetchSchoolDistrict(townName) {
     fetch(`/get_school_districts?town=${encodeURIComponent(townName)}`)
         .then(response => response.json())
         .then(data => {
-            const schoolSelect = document.getElementsByName('school district')[0];
+            const schoolSelect = document.getElementsByName('school_district')[0];
             schoolSelect.innerHTML = ''; // 既存の選択肢をクリア
             data.school_districts.forEach(school => {
                 schoolSelect.innerHTML += `<option>${school}</option>`; // 選択肢を追加

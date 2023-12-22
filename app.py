@@ -40,8 +40,9 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
-    country = db.Column(db.String(100))  # 国
-    city = db.Column(db.String(100))     # 都市
+    postcode = db.Column(db.String(100))  
+    address = db.Column(db.String(100))  
+    school_district = db.Column(db.String(100)) 
     birth_date = db.Column(db.Date)      # 生年月日
     password_hash = db.Column(db.String(128))
 
@@ -102,12 +103,13 @@ def register():
         email = request.form.get('email')
         password = request.form.get('password')
         password2 = request.form.get('password2')
-        country = request.form.get('country')
-        city = request.form.get('city')
+        postcode = request.form.get('postcode')
+        address = request.form.get('address')
+        school_district = request.form.get('school_district')
         birth_date_str = request.form.get('birth_date')
 
         # データのバリデーション
-        if not all([name, email, password, password2, country, city, birth_date_str]):
+        if not all([name, email, password, password2, postcode, address,school_district, birth_date_str]):
             flash('All fields are required.')
             return redirect(url_for('register'))
 
@@ -132,8 +134,9 @@ def register():
         new_user = User(
             name=name,
             email=email,
-            country=country,
-            city=city,
+            postcode=postcode,
+            address=address,
+            school_district=school_district,
             birth_date=birth_date
         )
         new_user.set_password(password)
