@@ -9,6 +9,7 @@ html, body {
     background: linear-gradient(to bottom right, #00695C, #6A1B9A); /* Standard syntax */
     overflow-x: hidden;
     padding-top:70px ;
+    color: white;
   }
 .container {
     max-width: 500px;
