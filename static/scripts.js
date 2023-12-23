@@ -28,26 +28,31 @@ function predictImage() {
     
                 if (loginStatus.is_logged_in) {
                     // FlaskからのURLを使用する
-                    if (data.url) {
-                        additionalInfo = `<p>${data.class}の処理方法について詳しくは<a href="${data.url}" target="_blank" rel="noopener noreferrer">こちら</a>を確認してください。</p>`;
-                        collectionDayInfo = '<p>あなたの街のゴミの処理日は<a href="LINK_TO_COLLECTION_DAY_INFO" target="_blank" rel="noopener noreferrer">こちら</a>です。</p>';
-                    }else {
-                        // URLがない場合のメッセージ
-                        additionalInfo = `<p>あなたの街の情報はまだ更新されていません。</p>`;
+                    if (data.how_url) {
+                        additionalInfo = `<p>${data.class}の処理方法について詳しくは<a href="${data.how_url}" target="_blank" rel="noopener noreferrer">こちら</a>を確認してください。</p>`;
+                    } else {
+                        additionalInfo = '<p>あなたの街の情報はまだ更新されていません。</p>';
                     }
                     
+                    // ゴミの処理日のリンクを追加
+                    if (data.day_url) {
+                        collectionDayInfo = `<p>${data.class}の処理日は<a href="${data.day_url}" target="_blank" rel="noopener noreferrer">こちら</a>です。</p>`;
+                    } else {
+                        collectionDayInfo = '';
+                    }
                 } else {
-                    additionalInfo = '<p>会員登録をすればあなたの街のゴミの処理日や分別方法も知ることができます。</p>';
-                    collectionDayInfo = '<p>ログインする場合は<a href="/login">こちら</a>から</p>';
+                    additionalInfo = '<p>会員登録してログインするとあなたの街のゴミの処理日や分別方法を知ることができます。</p>';
+                    collectionDayInfo = '<p><a href="/login">ログインはこちら</a></p>';
                 }
-    
+                
                 document.getElementById('modalResult').innerHTML = `
-                    <strong>結果:</strong> ${data.class} <br> 
+                    <strong>結果:</strong> ${data.class} <br>
                     <strong>判別精度:</strong> ${data.confidence_score}% <br>
                     <strong>説明:</strong> ${data.explanation}
                     ${additionalInfo}
                     ${collectionDayInfo}
                 `;
+                
                 document.getElementById('resultModal').classList.add('show');
                 document.getElementById('showResultButton').style.display = 'block';
                 document.getElementById('loading').style.display = 'none';

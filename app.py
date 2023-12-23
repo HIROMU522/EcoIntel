@@ -60,8 +60,6 @@ model = load_model("keras_Model.h5", compile=False)
 data = pd.read_csv("data.csv", header=None)
 selected_columns = [4, 6, 8, 10, 12, 14, 16, 18]
 class_names = data.iloc[0, selected_columns].tolist()
-url_columns = [5, 7, 9, 11, 13, 15, 17, 19]
-class_urls = data.iloc[1, url_columns].tolist()
 with open('explanation.txt', 'r', encoding="utf-8") as file:
     explanations = [line.strip() for line in file.readlines()]
 
@@ -288,7 +286,8 @@ def predict():
     explanation = explanations[index]
 
     # ログインしている場合のみURLを取得
-    url = None
+    how_url = None
+    day_url = None
     if current_user.is_authenticated:
         # ユーザーのschool_districtを取得
         user_school_district = current_user.school_district
@@ -302,12 +301,15 @@ def predict():
             row = matching_rows.iloc[0]
             url_columns = [5, 7, 9, 11, 13, 15, 17, 19]
             class_urls = row[url_columns].tolist()
-            url = class_urls[index]
+            how_url = class_urls[index]
+            day_url = row[3]  # ゴミの処理日のURL
+
     return jsonify({
         'class': class_name,
         'confidence_score': str(np.round(confidence_score * 100))[:-2],
         'explanation': explanation,
-        'url': url  # URLをJSONレスポンスに含める
+        'how_url': how_url,  # URLをJSONレスポンスに含める
+        'day_url': day_url
     })
 
 @app.route('/check_login_status')
