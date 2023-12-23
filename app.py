@@ -9,7 +9,7 @@ from datetime import datetime
 import os
 from flask_mail import Mail, Message
 import requests
-
+import pandas as pd
 
 
 # アプリケーションの設定
@@ -56,8 +56,10 @@ class User(UserMixin, db.Model):
 
 # モデルの読み込みとデータの準備
 model = load_model("keras_Model.h5", compile=False)
-with open('labels.txt', 'r', encoding="utf-8") as file:
-    class_names = [line.strip() for line in file.readlines()]
+# CSVファイルから特定の列を読み込む
+data = pd.read_csv("data.csv", header=None)
+selected_columns = [4, 6, 8, 10, 12, 14, 16, 18]
+class_names = data.iloc[0, selected_columns].tolist()
 with open('explanation.txt', 'r', encoding="utf-8") as file:
     explanations = [line.strip() for line in file.readlines()]
 
@@ -289,6 +291,14 @@ def predict():
         'confidence_score': str(np.round(confidence_score * 100))[:-2],
         'explanation': explanation
     })
+
+@app.route('/check_login_status')
+def check_login_status():
+    if current_user.is_authenticated:
+        return jsonify({'is_logged_in': True})
+    else:
+        return jsonify({'is_logged_in': False})
+
 
 
 # 町と校区のマッピングを読み込む

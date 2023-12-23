@@ -1,6 +1,7 @@
 from keras.models import load_model  # TensorFlow is required for Keras to work
 import cv2  # Install opencv-python
 import numpy as np
+import pandas as pd 
 
 # Disable scientific notation for clarity
 np.set_printoptions(suppress=True)
@@ -9,7 +10,10 @@ np.set_printoptions(suppress=True)
 model = load_model("keras_Model.h5", compile=False)
 
 # Load the labels
-class_names = open("labels.txt", "r").readlines()
+# CSVファイルから特定の列を読み込む
+data = pd.read_csv("data.csv", header=None)
+selected_columns = [4, 6, 8, 10, 12, 14, 16, 18]
+class_names = data.iloc[0, selected_columns].tolist()
 
 # CAMERA can be 0 or 1 based on default camera of your computer
 camera = cv2.VideoCapture(0)
