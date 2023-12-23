@@ -319,17 +319,20 @@ def check_login_status():
 
 
 
-# 町と校区のマッピングを読み込む
+# 町と校区のデータを取得
+towns = data.iloc[:, 1]  # 町のデータは2列目
+schools = data.iloc[:, 2]  # 校区のデータは3列目
+
+# 町と校区のマッピングを作成
 town_to_school_mapping = {}
-with open('town_school_mapping.txt', 'r', encoding='utf-8') as file:
-    for line in file:
-        parts = line.strip().split()
-        if len(parts) == 2:
-            town, school = parts
-            if town in town_to_school_mapping:
-                town_to_school_mapping[town].append(school)
-            else:
-                town_to_school_mapping[town] = [school]
+for town, school in zip(towns, schools):
+    if town in town_to_school_mapping:
+        # 町がすでにキーとして存在する場合は校区を追加
+        if school not in town_to_school_mapping[town]:
+            town_to_school_mapping[town].append(school)
+    else:
+        # 町がキーとして存在しない場合は新しいエントリを作成
+        town_to_school_mapping[town] = [school]
 
 
 
