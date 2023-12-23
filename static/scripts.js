@@ -46,12 +46,15 @@ function predictImage() {
                 }
                 
                 document.getElementById('modalResult').innerHTML = `
-                    <strong>結果:</strong> ${data.class} <br>
-                    <strong>判別精度:</strong> ${data.confidence_score}% <br>
-                    <strong>説明:</strong> ${data.explanation}
-                    ${additionalInfo}
-                    ${collectionDayInfo}
-                `;
+                    <div class="result-content">
+                        <strong>結果:</strong> ${data.class} <br>
+                        <strong>判別精度:</strong> ${data.confidence_score}% <br>
+                        <strong>説明:</strong> ${data.explanation}
+                        ${additionalInfo}
+                        ${collectionDayInfo}
+                    </div>
+`;              
+
                 
                 document.getElementById('resultModal').classList.add('show');
                 document.getElementById('showResultButton').style.display = 'block';
