@@ -60,6 +60,8 @@ model = load_model("keras_Model.h5", compile=False)
 data = pd.read_csv("data.csv", header=None)
 selected_columns = [4, 6, 8, 10, 12, 14, 16, 18]
 class_names = data.iloc[0, selected_columns].tolist()
+url_columns = [5, 7, 9, 11, 13, 15, 17, 19]
+class_urls = data.iloc[1, url_columns].tolist()
 with open('explanation.txt', 'r', encoding="utf-8") as file:
     explanations = [line.strip() for line in file.readlines()]
 
@@ -251,7 +253,6 @@ def submit_contact():
     return 'メッセージを送信しました。'
 
 
-
 @app.route('/predict', methods=['POST'])
 def predict():
     if 'image' not in request.files:
@@ -259,7 +260,7 @@ def predict():
 
     file = request.files['image']
     
-    # 画像形式のチェック (例: JPEG, PNG)
+    # 画像形式のチェック
     if not file.content_type in ['image/jpeg', 'image/png']:
         return jsonify({'error': 'サポートされていないファイル形式です。画像ファイル（JPEG、PNG）を選択してください。'}), 400
 
@@ -270,13 +271,13 @@ def predict():
     if image is None:
         return jsonify({'error': '画像の読み込みに失敗しました。'}), 400
 
-    # Process the image
+    # 画像の処理
     try:
         image = cv2.resize(image, (224, 224), interpolation=cv2.INTER_AREA)
         image = np.asarray(image, dtype=np.float32).reshape(1, 224, 224, 3)
         image = (image / 127.5) - 1
 
-        # Predict
+        # 予測
         prediction = model.predict(image)
     except Exception as e:
         return jsonify({'error': '予測処理中にエラーが発生しました。'}), 500
@@ -284,12 +285,29 @@ def predict():
     index = np.argmax(prediction)
     class_name = class_names[index].strip()
     confidence_score = prediction[0][index]
-    explanation = explanations[index] # 予測されたクラスに対応する説明を取得
+    explanation = explanations[index]
 
+    # ログインしている場合のみURLを取得
+    url = None
+    if current_user.is_authenticated:
+        # ユーザーのschool_districtを取得
+        user_school_district = current_user.school_district
+
+        # CSVファイルからデータを取得
+        data = pd.read_csv("data.csv", header=None)
+        matching_rows = data[data[2] == user_school_district]
+
+        # 該当する行がある場合のみURLを取得
+        if not matching_rows.empty:
+            row = matching_rows.iloc[0]
+            url_columns = [5, 7, 9, 11, 13, 15, 17, 19]
+            class_urls = row[url_columns].tolist()
+            url = class_urls[index]
     return jsonify({
         'class': class_name,
         'confidence_score': str(np.round(confidence_score * 100))[:-2],
-        'explanation': explanation
+        'explanation': explanation,
+        'url': url  # URLをJSONレスポンスに含める
     })
 
 @app.route('/check_login_status')

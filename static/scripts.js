@@ -5,18 +5,6 @@ function predictImage() {
 
     let formData = new FormData();
     formData.append('image', document.getElementById('imageUpload').files[0]);
-
-    // ゴミの種類と対応するリンクのマップ
-    const disposalLinks = {
-        'ペットボトル': 'https://www4.city.kanazawa.lg.jp/soshikikarasagasu/gomigenryosuishinka/gyomuannai/1/3/3/5537.html',
-        'ガラス類': 'https://www4.city.kanazawa.lg.jp/soshikikarasagasu/gomigenryosuishinka/gyomuannai/1/3/3/5544.html',
-        '衣類': 'https://www4.city.kanazawa.lg.jp/soshikikarasagasu/gomigenryosuishinka/gyomuannai/1/3/kosi/7602.html',
-        '乾電池': 'https://www4.city.kanazawa.lg.jp/soshikikarasagasu/gomigenryosuishinka/gyomuannai/1/3/3/5543.html',
-        '空き缶': 'https://www4.city.kanazawa.lg.jp/soshikikarasagasu/gomigenryosuishinka/gyomuannai/1/3/3/5536.html',
-        '燃えるゴミ': 'https://www4.city.kanazawa.lg.jp/soshikikarasagasu/gomigenryosuishinka/gyomuannai/1/3/3/7591.html',
-        '生ゴミ': 'https://www4.city.kanazawa.lg.jp/soshikikarasagasu/gomigenryosuishinka/gyomuannai/1/3/3/7591.html',
-        '空き瓶': 'https://www4.city.kanazawa.lg.jp/soshikikarasagasu/gomigenryosuishinka/gyomuannai/1/3/3/5535.html'
-    };
     
     fetch('/predict', {
         method: 'POST',
@@ -31,7 +19,6 @@ function predictImage() {
         return response.json();
     })
     .then(data => {
-        // ユーザーのログイン状態をチェックする
         fetch('/check_login_status')
         .then(response => response.json())
         .then(loginStatus => {
@@ -40,14 +27,16 @@ function predictImage() {
                 let collectionDayInfo = '';
     
                 if (loginStatus.is_logged_in) {
-                    // ユーザーがログインしている場合のみこの情報を表示
-                    if (disposalLinks[data.class]) {
-                        additionalInfo = `<p>${data.class}の処理方法について詳しくは<a href="${disposalLinks[data.class]}" target="_blank" rel="noopener noreferrer">こちら</a>を確認してください。</p>`;
+                    // FlaskからのURLを使用する
+                    if (data.url) {
+                        additionalInfo = `<p>${data.class}の処理方法について詳しくは<a href="${data.url}" target="_blank" rel="noopener noreferrer">こちら</a>を確認してください。</p>`;
+                        collectionDayInfo = '<p>あなたの街のゴミの処理日は<a href="LINK_TO_COLLECTION_DAY_INFO" target="_blank" rel="noopener noreferrer">こちら</a>です。</p>';
+                    }else {
+                        // URLがない場合のメッセージ
+                        additionalInfo = `<p>あなたの街の情報はまだ更新されていません。</p>`;
                     }
-    
-                    collectionDayInfo = '<p>あなたの街のゴミの処理日は<a href="LINK_TO_COLLECTION_DAY_INFO" target="_blank" rel="noopener noreferrer">こちら</a>です。</p>';
+                    
                 } else {
-                    // ログインしていない場合のメッセージ
                     additionalInfo = '<p>会員登録をすればあなたの街のゴミの処理日や分別方法も知ることができます。</p>';
                     collectionDayInfo = '<p>ログインする場合は<a href="/login">こちら</a>から</p>';
                 }
@@ -65,7 +54,6 @@ function predictImage() {
             }, 2500);
         });
     })
-    
     .catch(err => {
         console.error(err);
         document.getElementById('loading').style.display = 'none';
