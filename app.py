@@ -198,17 +198,6 @@ def settings():
 @login_required
 def update_settings():
     user = current_user
-
-    # ユーザー名の更新
-    username = request.form.get('username').strip()
-    if username and username != user.username:
-        existing_user = User.query.filter_by(username=username).first()
-        if existing_user:
-            flash('このユーザー名はすでに使われています。')
-            return redirect(url_for('settings'))
-        else:
-            user.username = username
-
     # メールアドレスの更新
     email = request.form.get('email').strip()
     if email and email != user.email:
