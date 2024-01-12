@@ -90,10 +90,17 @@ html, body {
 
 
 h1 {
-    color: #fbf8f8;
+    color: #666262;
     text-align: center;
     margin-bottom: 30px;
 }
+
+h2 {
+  color: #faf9f9;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
 
 .input-section {
     display: flex;
@@ -372,7 +379,7 @@ h1 {
   font-size: 0.85rem;
 }
 
-#information article h2 {
+#information article h3 {
   margin-bottom: 30px;
   padding-bottom: 12px;
   font-size: 1.15rem;
