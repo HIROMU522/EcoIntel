@@ -96,11 +96,25 @@ h1 {
   width: 260px;
 }
 
+.register-form select {
+  padding: 15px; 
+  margin: 5px 0;
+  width: 294px;
+}
+
 .register-form input::placeholder {
   color: #aaa;
 }
 
+.register-form select::placeholder {
+  color: #aaa;
+}
+
 .register-form input.error::placeholder {
+  color: #555;
+}
+
+.register-form select.error::placeholder {
   color: #555;
 }
 
@@ -166,6 +180,9 @@ input::placeholder {
   color: black;
 }
 
+select::placeholder { 
+  color: black;
+}
 
 @media(max-width: 600px) {
   .step-bar {
