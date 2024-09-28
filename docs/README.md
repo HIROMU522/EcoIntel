@@ -8,7 +8,8 @@
 ゴミの画像を認識しその分別方法をユーザーの地域別に出力しゴミの分別を促進するWebアプリ
 
 ## デモ動画
-https://github.com/user-attachments/assets/81fc0070-8992-4367-b921-9e60a33cf3a1
+![demo](https://github.com/user-attachments/assets/ca1f0831-b89c-4940-96a4-4bfe148ef1fa)
+
 
 ## アーキテクチャ
 <img width="554" alt="スクリーンショット 2024-09-28 15 40 23" src="https://github.com/user-attachments/assets/c5219d04-d79c-4685-b0c7-6a2f2804ce10">
