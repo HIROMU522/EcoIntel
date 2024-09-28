@@ -24,3 +24,6 @@ https://github.com/user-attachments/assets/81fc0070-8992-4367-b921-9e60a33cf3a1
 
 ## 発表資料
 - [最終発表ポスター](presentation.md)
+
+## 結果
+🏆学科内準優勝
