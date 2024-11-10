@@ -1,0 +1,12 @@
+Flask
+Flask-SQLAlchemy
+Flask-Login
+Werkzeug
+numpy==1.26.1
+pandas
+opencv-python
+tensorflow
+Flask-Mail
+requests
+tensorflow==2.14.0
+keras==2.14.0

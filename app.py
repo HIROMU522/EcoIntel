@@ -55,7 +55,7 @@ class User(UserMixin, db.Model):
 
 
 # モデルの読み込みとデータの準備
-model = load_model("keras_Model.h5", compile=False)
+model = load_model("keras_model.h5", compile=False)
 # CSVファイルから特定の列を読み込む
 data = pd.read_csv("data.csv", header=None)
 selected_columns = [4, 6, 8, 10, 12, 14, 16, 18]
